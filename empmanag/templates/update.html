@@ -1,0 +1,48 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>update</title>
+    <style>
+        input {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        <form action="{% url 'update' request.user.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h4>first-name</h4>
+            <input type='text' name='fname' placeholder="{{request.user.first_name}}">
+            <h4>last-name</h4>
+            <input type='text' name='lname' placeholder="{{request.user.last_name}}">
+            <h4>email</h4>
+            <input type='email' name='email' placeholder="{{request.user.email}}">
+            <h4>phone</h4>
+            <input type='text' name='phone' placeholder="{{request.user.employee.phone}}">
+            <h4>password</h4>
+            <input type='password' name='password' placeholder="{{request.user.password}}">
+            <h4>address</h4>
+            <input type='textarea' name='address' placeholder="{{request.user.employee.address}}" style="height: 50px;">
+            <img src="{{request.user.employee.img.url}}">
+            <input type='file' name='pic' accept="image/png, image/jpeg">
+            <input type='submit'>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+
+</html>
