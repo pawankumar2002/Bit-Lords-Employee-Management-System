@@ -35,7 +35,7 @@ def register_user(request):
                 user = User.objects.create_user(
                     username=username, password=password1, email=email,first_name=fname,last_name=lname)
                 user.save()
-                messages.info(request, 'account created for' + username)
+                messages.info(request, 'account created for' +' '+username)
                 return redirect('register')
             else:
                 messages.info(request, 'password not matching')
@@ -86,11 +86,13 @@ def dashboard(request,emp_id):
         preMonth='Dec'
         attandance=Attendance.objects.filter(emp=employee)
         count=0
-        for i in attandance:
-            if(preMonth+'/'+year in i.date):
-                count+=1
-            else:
-                continue
+
+        if attandance.count() !=0:
+            for i in attandance:
+                if(preMonth+'/'+year in i.date):
+                    count+=1
+                else:
+                    continue
 
         preMonthAttandance=count
         preMonthSalary=int(employee.employee.perDaySalary)*preMonthAttandance
@@ -101,11 +103,12 @@ def dashboard(request,emp_id):
         preMonth="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(' ')[month-2]
         attandance=Attendance.objects.filter(emp=employee)
         count=0
-        for i in attandance:
-            if(preMonth+'/'+year in i.date):
-                count+=1
-            else:
-                continue
+        if attandance.count() !=0:
+            for i in attandance:
+                if(preMonth+'/'+year in i.date):
+                    count+=1
+                else:
+                    continue
 
         preMonthAttandance=count
         preMonthSalary=int(employee.employee.perDaySalary)*preMonthAttandance
@@ -134,10 +137,10 @@ def attandance(request,emp_id):
         markAttend=Attendance(emp=employee,status=True,date=date)
         markAttend.save()
         messages.info(request,'Your attandance is marked successfully')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
         messages.info(request,'Attandance Window is closed be punctual from next time')
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
 
         
 def update(request,emp_id):
