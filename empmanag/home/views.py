@@ -6,7 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 import datetime
-from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -79,7 +78,6 @@ def dashboard(request,emp_id):
     else:
         task=''
 
-
     preMonthSalary=0
     preMonth=''
     year=''
@@ -112,12 +110,13 @@ def dashboard(request,emp_id):
         preMonthAttandance=count
         preMonthSalary=int(employee.employee.perDaySalary)*preMonthAttandance
 
+        
     notices=Notice.objects.all().order_by('-date')
     active=notices[0].id
 
     
     preMonthBonus=employee.employee.bonus
-    context={'date':date,'time':time,'status':status,'task':task,'preMonth':preMonth,'year':year,'preMonthSalary':preMonthSalary,'preMonthBonus':preMonthBonus,'notices':notices,'activeNotice':active}
+    context={'date':date,'time':time,'status':status,'task':task,'preMonth':preMonth,'year':year,'preMonthSalary':preMonthSalary,'preMonthBonus':preMonthBonus,'notices':notices}
     return render(request,'dashboard.html',context)
 
 def attandance(request,emp_id):
@@ -126,12 +125,13 @@ def attandance(request,emp_id):
     minute=int(timeNow.strftime("%M"))
     hour=int(timeNow.strftime("%I"))
     p=timeNow.strftime("%p")
-    delay=officeTime[0]-minute
+    delay=minute-officeTime[1]
+    print(delay)
     employee=User.objects.get(id=emp_id)
     date=timeNow.strftime("%d")+'/'+timeNow.strftime("%b")+'/'+timeNow.strftime("%Y")
 
-    if delay<20 and hour==9 and p=='AM' :
-        markAttend=Attendance(emp=employee,status=1,date=date)
+    if delay<20 and hour==9 and p=='AM':
+        markAttend=Attendance(emp=employee,status=True,date=date)
         markAttend.save()
         messages.info(request,'Your attandance is marked successfully')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -150,45 +150,44 @@ def update(request,emp_id):
         password=request.POST['password']
         pic = request.FILES.get('pic', False)
         emp=User.objects.get(id=emp_id)
-        print(pic)
 
         if fname!='':
             emp.first_name=fname
             emp.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'First Name updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         elif lname!='':
             emp.last_name=lname
             emp.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'Last Name updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         elif email!='':
             emp.email=email
             emp.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'Email updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         elif phone!='':
             emp.employee.phone=phone
-            emp.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            emp.employee.save()
+            messages.info(request,'Phone updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         elif addr!='':
             emp.employee.address=addr
             emp.employee.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'Address updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         elif password!='':
-            emp.password=password
+            emp.set_password(password)
             emp.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'Password updated successfully')
+            return redirect('login')
         elif pic!=False:
             emp.employee.img=pic
             emp.employee.save()
-            messages.info(request,'profile updated successfully')
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            messages.info(request,'Profile Picture updated successfully')
+            return redirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         return render(request,'update.html')

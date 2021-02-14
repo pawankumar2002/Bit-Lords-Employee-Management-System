@@ -11,7 +11,7 @@ class Employee(models.Model):
     emp= models.OneToOneField(settings.AUTH_USER_MODEL, null=True,on_delete=models.CASCADE)
     img=models.ImageField(upload_to='profilepic',null=True, blank=True,default='profilepic/profile.jpg')
     address=models.TextField(null=True, blank=True)
-    phone=models.CharField(max_length=10,null=True, blank=True)
+    phone=models.CharField(max_length=12,null=True, blank=True)
     perDaySalary=models.CharField(max_length=10,default=0)
     bonus=models.CharField(max_length=10,default=0)
     post=models.CharField(max_length=10)
@@ -24,7 +24,7 @@ class Employee(models.Model):
 class Attendance(models.Model):
     emp= models.ForeignKey(settings.AUTH_USER_MODEL, null=True,on_delete=models.CASCADE)
     date=models.CharField(null=True, blank=True,max_length=15)
-    status=models.CharField(max_length=5,default=0)
+    status=models.BooleanField(max_length=5,default=False)
     task=models.TextField(null=True,blank=True,default="no task for today")
     
     def __str__(self):
@@ -43,5 +43,4 @@ class Notice(models.Model):
 def employee_registration_config(sender, instance, created, **kwargs):
     if created:
         Employee.objects.create(emp=instance)
-        Attendance.objects.create(emp=instance)
 post_save.connect(employee_registration_config, sender=User)
