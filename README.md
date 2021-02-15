@@ -12,9 +12,10 @@ Pillow==8.1.0
 use command to install package
 pip install <package-name>
 
-how to use:
+how to use as admin:
 
 1> go to directory where manage.py file is located i.e. Bit-Lords\empmanage
+
 2> create superuser
     use command:
     python manage.py createsuperuser 
@@ -38,9 +39,9 @@ You can track attandance or assign task to employee from admin panel
 
 
 
-credits:
+credits========================================================================================================
 
-bakend developed by
+developed by
 
 Pawan Kumar 
 B.Tech IIT-Patna

@@ -1,4 +1,5 @@
 {% include 'navbar.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>update</title>
     <style>
-        input {
-            display: block;
+        body {
+            background-image: url("{% static 'bg2.jpg' %}");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
         }
     </style>
 </head>
@@ -17,29 +22,86 @@
 <body>
     <div class="container">
         {% for message in messages %}
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
             {{message}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
-        <form action="{% url 'update' request.user.id %}" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h4>first-name</h4>
-            <input type='text' name='fname' placeholder="{{request.user.first_name}}">
-            <h4>last-name</h4>
-            <input type='text' name='lname' placeholder="{{request.user.last_name}}">
-            <h4>email</h4>
-            <input type='email' name='email' placeholder="{{request.user.email}}">
-            <h4>phone</h4>
-            <input type='text' name='phone' placeholder="{{request.user.employee.phone}}">
-            <h4>password</h4>
-            <input type='password' name='password' placeholder="new-password">
-            <h4>address</h4>
-            <input type='textarea' name='address' placeholder="{{request.user.employee.address}}" style="height: 50px;">
-            <img src="{{request.user.employee.img.url}}">
-            <input type='file' name='pic' accept="image/png, image/jpeg">
-            <input type='submit'>
-        </form>
+
+        <div class="card my-4 mx-auto border-dark" style="width:60%">
+            <h5 class="card-header" style="background-color: #6610f2;color: white;">Update Profile</h5>
+
+            <img src="{{request.user.employee.img.url}}" class="img-fluid mx-auto my-4"
+                    style="border-radius: 50%; width: 40%;">
+
+            <div class="card-body">
+                <form action="{% url 'update' request.user.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <input class="form-control" type="file" id="formFile" name='pic' accept="image/png, image/jpeg">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">First Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='fname'
+                            placeholder="{{request.user.first_name}}">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Last Name</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='lname'
+                            placeholder="{{request.user.last_name}}">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                        <input type="email" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='email'
+                            placeholder="{{request.user.email}}">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='phone'
+                            placeholder="{{request.user.employee.phone}}">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Password</span>
+                        <input type="password" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='password' placeholder="new-password">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+                        <input type="textarea" class="form-control py-4" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name='address'
+                            placeholder="{{request.user.employee.address}}">
+                    </div>
+
+                    <!-- <h4>first-name</h4>
+                    <input type='text' name='fname' placeholder="{{request.user.first_name}}">
+                    <h4>last-name</h4>
+                    <input type='text' name='lname' placeholder="{{request.user.last_name}}">
+                    <h4>email</h4>
+                    <input type='email' name='email' placeholder="{{request.user.email}}">
+                    <h4>phone</h4>
+                    <input type='text' name='phone' placeholder="{{request.user.employee.phone}}">
+                    <h4>password</h4>
+                    <input type='password' name='password' placeholder="new-password">
+                    <h4>address</h4>
+                    <input type='textarea' name='address' placeholder="{{request.user.employee.address}}"
+                        style="height: 50px;">
+                    <input type='file' name='pic' accept="image/png, image/jpeg"> -->
+                    <input type='submit' class="btn btn-primary">
+                </form>
+
+            </div>
+        </div>
     </div>
 
     {% include 'footer.html' %}

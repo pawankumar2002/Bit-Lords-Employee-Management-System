@@ -14,17 +14,15 @@ class Employee(models.Model):
     phone=models.CharField(max_length=12,null=True, blank=True)
     perDaySalary=models.CharField(max_length=10,default=0)
     bonus=models.CharField(max_length=10,default=0)
-    post=models.CharField(max_length=30)
+    post=models.CharField(max_length=20,null=True,blank=True)
 
     def __str__(self):
         return str(self.emp)
 
-        
-
 class Attendance(models.Model):
     emp= models.ForeignKey(settings.AUTH_USER_MODEL, null=True,on_delete=models.CASCADE)
-    date=models.CharField(null=True, blank=True,max_length=15)
-    status=models.BooleanField(max_length=5,default=False)
+    date=models.CharField(max_length=15)
+    status=models.CharField(max_length=5,default=0)
     task=models.TextField(null=True,blank=True,default="no task for today")
     
     def __str__(self):

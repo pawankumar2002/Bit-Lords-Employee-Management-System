@@ -12,7 +12,7 @@
 
 <body>
   <div class="container">
-    <h1>Employee Dashboard</h1>
+    <h1 class="my-2">Employee Dashboard</h1>
     <div class="alert alert-info my-2" role="alert" style="width:auto;">
       <p><b>Task Today</b> {{date}}</p>
       <p>{{task}}</p>
@@ -20,9 +20,9 @@
 
     <div class="row">
 
-      <div class="col-6">
-        <div class="card" style="width: 18rem;">
-          <img src="{{user.employee.img.url}}" class="card-img-top" width="80%" height="auto">
+      <div class="col-lg-6 col-md-12">
+        <div class="card border border-dark my-4">
+          <img src="{{user.employee.img.url}}" class="img-fluid mx-auto my-4" style="border-radius: 50%; width: 50%;">
           <div class="card-body">
             <h5 class="card-title">{{request.user.first_name}} {{request.user.last_name}}</h5>
             <p class="card-text">{{user.employee.post}}</p>
@@ -32,27 +32,11 @@
           </div>
         </div>
 
-        <br>
-
-        <div class="card" style="width: 18rem;">
-          <div class="card-header bg-dark">
-            <p style="color: white;"><b>{{preMonth}}/{{year}}</b></p>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <b>Salary : </b>{{preMonthSalary}} ₹
-            </li>
-            <li class="list-group-item">
-              <b>Bonus : </b>{{preMonthBonus}} ₹
-            </li>
-          </ul>
-        </div>
-
       </div>
 
-      <div class="col-6">
+      <div class="col-lg-6 col-md-12">
 
-        <div class="card" style="width:80%;">
+        <div class="card border border-dark my-4">
           <div class="card-header bg-dark">
             <b style="color: white;">Attandance</b>
           </div>
@@ -74,9 +58,7 @@
           </div>
         </div>
 
-        <br>
-
-        <div class="card">
+        <div class="card border border-dark my-4">
           <div class="card-header bg-dark">
             <h5 style="color:white">Notice Board</h5>
           </div>
@@ -100,6 +82,22 @@
             </div>
           </div>
         </div>
+
+        <div class="card border border-dark my-4">
+          <div class="card-header bg-dark">
+            <p style="color: white;"><b>{{preMonth}}/{{year}}</b></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <b>Salary : </b>{{preMonthSalary}} ₹
+            </li>
+            <li class="list-group-item">
+              <b>Bonus : </b>{{preMonthBonus}} ₹
+            </li>
+          </ul>
+        </div>
+
+
       </div>
 
     </div>

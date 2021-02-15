@@ -133,7 +133,7 @@ def attandance(request,emp_id):
     employee=User.objects.get(id=emp_id)
     date=timeNow.strftime("%d")+'/'+timeNow.strftime("%b")+'/'+timeNow.strftime("%Y")
 
-    if delay<20 and hour==9 and p=='AM':
+    if delay<20 and hour==officeTime[0] and p==officeTime[2]:
         markAttend=Attendance(emp=employee,status=True,date=date)
         markAttend.save()
         messages.info(request,'Your attandance is marked successfully')
@@ -158,39 +158,38 @@ def update(request,emp_id):
             emp.first_name=fname
             emp.save()
             messages.info(request,'First Name updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        elif lname!='':
+
+        if lname!='':
             emp.last_name=lname
             emp.save()
             messages.info(request,'Last Name updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        elif email!='':
+
+        if email!='':
             emp.email=email
             emp.save()
             messages.info(request,'Email updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        elif phone!='':
+            
+        if phone!='':
             emp.employee.phone=phone
             emp.employee.save()
             messages.info(request,'Phone updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        elif addr!='':
+            
+        if addr!='':
             emp.employee.address=addr
             emp.employee.save()
             messages.info(request,'Address updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        elif password!='':
+            
+        if password!='':
             emp.set_password(password)
             emp.save()
             messages.info(request,'Password updated successfully')
-            return redirect('login')
-        elif pic!=False:
+            
+        if pic!=False:
             emp.employee.img=pic
             emp.employee.save()
             messages.info(request,'Profile Picture updated successfully')
-            return redirect(request.META.get('HTTP_REFERER'))
-        else:
-            return redirect(request.META.get('HTTP_REFERER'))
+           
+        return redirect(request.META.get('HTTP_REFERER'))
 
     else:
         return render(request,'update.html')
