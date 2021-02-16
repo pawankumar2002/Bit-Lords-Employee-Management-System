@@ -38,16 +38,16 @@
 
         <div class="card border border-dark my-4">
           <div class="card-header bg-dark">
-            <b style="color: white;">Attandance</b>
+            <b style="color: white;">Attendance</b>
           </div>
           <div class="card-body">
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             {% if status == 1 %}
             <div class="alert alert-success" role="alert">
-              Your attandance is marked
+              Your attendance is marked
             </div>
             {% else %}
-            <a href="{% url 'attandance' request.user.id %}" class="btn btn-primary">mark Attandance</a>
+            <a href="{% url 'attandance' request.user.id %}" class="btn btn-primary">Mark Attendance</a>
             {% endif %}
             {% for message in messages %}
             <div class="alert alert-warning alert-dismissible fade show" role="alert">

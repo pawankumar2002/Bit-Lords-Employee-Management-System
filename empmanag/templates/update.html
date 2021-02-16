@@ -67,7 +67,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default" name='phone'
-                            placeholder="{{request.user.employee.phone}}">
+                            placeholder="{{request.user.employee.phone}}" maxlength="10">
                     </div>
 
                     <div class="input-group mb-3">
@@ -82,21 +82,7 @@
                             aria-describedby="inputGroup-sizing-default" name='address'
                             placeholder="{{request.user.employee.address}}">
                     </div>
-
-                    <!-- <h4>first-name</h4>
-                    <input type='text' name='fname' placeholder="{{request.user.first_name}}">
-                    <h4>last-name</h4>
-                    <input type='text' name='lname' placeholder="{{request.user.last_name}}">
-                    <h4>email</h4>
-                    <input type='email' name='email' placeholder="{{request.user.email}}">
-                    <h4>phone</h4>
-                    <input type='text' name='phone' placeholder="{{request.user.employee.phone}}">
-                    <h4>password</h4>
-                    <input type='password' name='password' placeholder="new-password">
-                    <h4>address</h4>
-                    <input type='textarea' name='address' placeholder="{{request.user.employee.address}}"
-                        style="height: 50px;">
-                    <input type='file' name='pic' accept="image/png, image/jpeg"> -->
+                    
                     <input type='submit' class="btn btn-primary">
                 </form>
 
