@@ -4,6 +4,10 @@ Project Description:  This project is a Employee Management system
 Features: track attendance, salary/bonus calculation, Task assignment online, publish notice
 
 
+ppt and demo video:
+https://drive.google.com/drive/folders/1fbz3f2jY5RKYqOHhGqPmnoBHFgMVS-FC?usp=sharing
+
+
 package required
 Python==3.7.0
 Django==3.1.5
