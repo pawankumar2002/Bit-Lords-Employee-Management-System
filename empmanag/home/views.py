@@ -66,51 +66,40 @@ def logout_user(request):
 
 def dashboard(request,emp_id):
     x = datetime.datetime.now()
+
+    #day month year
+    day=int(x.strftime("%d"))
+    month=x.strftime("%b")
+    year=int(x.strftime("%Y"))
+
     date=x.strftime("%d")+'/'+x.strftime("%b")+'/'+x.strftime("%Y")
+
     time=x.strftime("%I")+':'+x.strftime("%M")+' '+x.strftime("%p")
 
     employee=User.objects.get(id=emp_id)
-    attandance=Attendance.objects.filter(emp=employee,date=date)
+    attandance=Attendance.objects.filter(emp=employee,day=day,month=month,year=year)
     status=attandance.count()
 
     if(status==1):
-        task = Attendance.objects.get(emp=employee,date=date).task
+        task = Attendance.objects.get(emp=employee,day=day,month=month,year=year).task
     else:
         task=''
 
-    preMonthSalary=0
-    preMonth=''
-    year=''
+
     if(x.strftime("%b")=='Jan'):
-        year=str(x.year-1)
+        year=int(x.year-1)
         preMonth='Dec'
-        attandance=Attendance.objects.filter(emp=employee)
-        count=0
+        attandance=Attendance.objects.filter(emp=employee,month=preMonth,year=year)
 
-        if attandance.count() !=0:
-            for i in attandance:
-                if(preMonth+'/'+year in i.date):
-                    count+=1
-                else:
-                    continue
-
-        preMonthAttandance=count
+        preMonthAttandance=attandance.count()
         preMonthSalary=int(employee.employee.perDaySalary)*preMonthAttandance
 
     else:
-        year=str(x.strftime("%Y"))
+        year=int(x.strftime("%Y"))
         month=int(x.month)
         preMonth="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(' ')[month-2]
-        attandance=Attendance.objects.filter(emp=employee)
-        count=0
-        if attandance.count() !=0:
-            for i in attandance:
-                if(preMonth+'/'+year in i.date):
-                    count+=1
-                else:
-                    continue
-
-        preMonthAttandance=count
+        attandance=Attendance.objects.filter(emp=employee,month=preMonth,year=year)
+        preMonthAttandance=attandance.count()
         preMonthSalary=int(employee.employee.perDaySalary)*preMonthAttandance
 
         
@@ -124,17 +113,20 @@ def dashboard(request,emp_id):
 
 def attandance(request,emp_id):
     officeTime=[9,0,'AM']
-    timeNow=datetime.datetime.now()
-    minute=int(timeNow.strftime("%M"))
-    hour=int(timeNow.strftime("%I"))
-    p=timeNow.strftime("%p")
+    x=datetime.datetime.now()
+    minute=int(x.strftime("%M"))
+    hour=int(x.strftime("%I"))
+    p=x.strftime("%p")
     delay=minute-officeTime[1]
-    print(delay)
+
     employee=User.objects.get(id=emp_id)
-    date=timeNow.strftime("%d")+'/'+timeNow.strftime("%b")+'/'+timeNow.strftime("%Y")
+
+    day=int(x.strftime("%d"))
+    month=x.strftime("%b")
+    year=int(x.strftime("%Y"))
 
     if delay<20 and hour==officeTime[0] and p==officeTime[2]:
-        markAttend=Attendance(emp=employee,status=True,date=date)
+        markAttend=Attendance(emp=employee,status=True,day=day,month=month,year=year)
         markAttend.save()
         messages.info(request,'Your attandance is marked successfully')
         return redirect(request.META.get('HTTP_REFERER'))

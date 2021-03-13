@@ -21,12 +21,14 @@ class Employee(models.Model):
 
 class Attendance(models.Model):
     emp= models.ForeignKey(settings.AUTH_USER_MODEL, null=True,on_delete=models.CASCADE)
-    date=models.CharField(max_length=15)
+    day=models.IntegerField(null=True,blank=True)
+    month=models.CharField(max_length=5,default=0)
+    year=models.IntegerField(null=True,blank=True)
     status=models.CharField(max_length=5,default=0)
     task=models.TextField(null=True,blank=True,default="no task for today")
     
     def __str__(self):
-        return str(self.date)+' '+str(self.emp)
+        return str(self.day)+'/'+str(self.month)+'/'+str(self.year)+' '+str(self.emp)
 
 class Notice(models.Model):
     title=models.CharField(max_length=30)
