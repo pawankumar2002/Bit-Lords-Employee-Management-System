@@ -2,8 +2,12 @@
 
 ##### Project Description:  
 This project is a Employee Management system created for Hack-it-out Hackathon 
-Features:
-track attendance, salary/bonus calculation, Task assignment online, publish notice
+
+##### Features:
+- track attendance
+- salary/bonus calculation 
+- Task assignment
+- online publish notice
 
 
 ##### ppt and demo video:
