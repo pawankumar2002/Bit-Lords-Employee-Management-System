@@ -20,17 +20,23 @@ https://drive.google.com/drive/folders/1fbz3f2jY5RKYqOHhGqPmnoBHFgMVS-FC?usp=sha
 3. Pillow==8.1.0
 
 ##### use command to install package
-```bash pip install <package-name>```
+```bash 
+pip install <package-name>
+```
 
 ##### how to use as admin:
 
 1. go to directory where manage.py file is located i.e. Bit-Lords\empmanage
 
 2. create superuser
-   ```bashpython manage.py createsuperuser ```
+   ```
+   bash python manage.py createsuperuser
+   ```
 
 3. start the server
-    ```bashpython manage.py runserver```
+    ```bash 
+    python manage.py runserver
+    ```
 
 
 *You can track attandance or assign task to employee from admin panel*
