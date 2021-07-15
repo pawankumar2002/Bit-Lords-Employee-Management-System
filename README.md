@@ -1,30 +1,36 @@
 # Bit-Lords
 
-##### Project Description:  
+#### Project Description:  
 This project is a Employee Management system created for Hack-it-out Hackathon 
 
-##### Features:
+#### Features:
 - track attendance
 - salary/bonus calculation 
 - Task assignment
 - online publish notice
 
 
-##### ppt and demo video:
+#### ppt and demo video:
 https://drive.google.com/drive/folders/1fbz3f2jY5RKYqOHhGqPmnoBHFgMVS-FC?usp=sharing
 
+#### Tech Stacks
+- Django
+- Bootstrap 5.0
+- HTML
+- CSS
 
-##### package required
+
+#### package required
 - Python==3.7.0
 - Django==3.1.5
 - Pillow==8.1.0
 
-##### use command to install package
+#### use command to install package
 ```bash 
 pip install <package-name>
 ```
 
-##### how to use as admin:
+#### how to use as admin:
 
 1. go to directory where manage.py file is located i.e. Bit-Lords\empmanage
 
@@ -41,9 +47,9 @@ pip install <package-name>
 
 *You can track attandance or assign task to employee from admin panel*
 
-#### credits
+---
 
-##### developed by
+#### developed by
 
 |Name|Roll No.|Email|
 |-|-|-|
