@@ -15,9 +15,9 @@ https://drive.google.com/drive/folders/1fbz3f2jY5RKYqOHhGqPmnoBHFgMVS-FC?usp=sha
 
 
 ##### package required
-1. Python==3.7.0
-2. Django==3.1.5
-3. Pillow==8.1.0
+- Python==3.7.0
+- Django==3.1.5
+- Pillow==8.1.0
 
 ##### use command to install package
 ```bash 
