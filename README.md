@@ -54,5 +54,3 @@ pip install <package-name>
 |Name|Roll No.|Email|
 |-|-|-|
 |Pawan Kumar|2001EE42|pawan_2001ee42@iitp.ac.in|
-|Suyog Chaudhari|2001EE42|suyog_2001ee33@iitp.ac.in|
-|Vishal Yadav|2001CB64|vishal_2001cb64@iitp.ac.in|
